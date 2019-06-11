@@ -6,12 +6,11 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import GetIss from './components/GetIss'
 export default {
   name: 'app',
   components: {
-    GetIss
+    GetIss,
   }
 }
 </script>
