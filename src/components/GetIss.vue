@@ -68,9 +68,16 @@
       </div>
 
       <!-- leaflet Js mapping feauture -->
-      <div id="openMap" ref="mapElement" class="w-full h-64 shadow-xl rounded-lg mt-10 p-8 bg-indigo-200">
-        <button @click="initMap" class="bg-indigo-500 m-12 text-white rounded p-8">SEE THE LIVE TRACKING</button>
-        </div>    
+      <div
+        id="openMap"
+        ref="mapElement"
+        class="w-full h-64 shadow-xl rounded-lg mt-10 p-8 bg-indigo-200"
+      >
+        <button
+          @click="initMap"
+          class="bg-indigo-500 m-12 text-white rounded p-8"
+        >SEE THE LIVE TRACKING</button>
+      </div>
       <div class="max-w-md md:flex bg-white mt-12 rounded-lg mx-auto shadow-xl p-8">
         <img
           src="../assets/developer.png"
@@ -97,7 +104,7 @@
 // https://www.google.com/maps/place/51%C2%B030'31.5%22N+0%C2%B007'15.1%22W/@51.508742,-0.1230387,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x0!8m2!3d51.508742!4d-0.12085
 import Axios from "axios";
 import L from "leaflet";
-import { setInterval } from 'timers';
+import { setInterval } from "timers";
 
 export default {
   data() {
@@ -111,18 +118,21 @@ export default {
       map: null,
       tiles: null,
       layers: [],
-      tileUrl: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-
+      tileUrl: "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
     };
   },
   methods: {
     initMap() {
-      this.map = L.map('openMap').setView([this.info.latitude, this.info.longitude], 2)
+      this.map = L.map("openMap").setView(
+        [this.info.latitude, this.info.longitude],
+        2
+      );
       /* attributions for adding leaflet map // its important */
-      const attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
-      this.tiles = L.tileLayer(this.tileUrl, { attribution })
-      this.tiles.addTo(this.map)
-    },
+      const attribution =
+        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>';
+      this.tiles = L.tileLayer(this.tileUrl, { attribution });
+      this.tiles.addTo(this.map);
+    }
     //initLayers() {}
   },
   created() {
@@ -133,20 +143,20 @@ export default {
       .catch(error => {
         this.error.push(error);
         this.error.push(error);
+        alert('sorry, network failure')
         this.error = true;
       })
       .finally(() => (this.loading = false));
   },
   mounted() {
-    this.initMap()
+    this.initMap();
   }
 };
 
 setInterval(() => {
-  let openMap = document.getElementById('openMap')
-  location.reload()
+  let openMap = document.getElementById("openMap");
+  location.reload();
 }, 40000);
-
 </script>
 
 
