@@ -68,8 +68,9 @@
       </div>
 
       <!-- leaflet Js mapping feauture -->
-      <div id="issMap" ref="mapElement" class="w-full shadow-xl rounded mt-10 p-8 bg-gray-2200"></div>
-
+      <div id="openMap" ref="mapElement" class="w-full shadow-xl rounded mt-10 p-8 bg-gray-2200"></div>
+      {{ tileUrl }} 123456 MAP ADDING
+      <button @click="initMap" class="bg-red-500 p-8">SHOW MAP</button>
       <div class="max-w-md md:flex bg-white mt-12 rounded-lg mx-auto shadow-xl p-8">
         <img
           src="../assets/iss.png"
@@ -106,27 +107,21 @@ export default {
       error: false,
       latitude: "51.508742",
       longitude: "-0.120850",
-      map_url:
-        "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2965.0824050173574!2d-93.63905729999999!3d41.998507000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sWebFilings%2C+University+Boulevard%2C+Ames%2C+IA!5e0!3m2!1sen!2sus!4v1390839289319",
       map: null,
-      tileLayer: null,
-      layers: []
+      tiles: null,
+      layers: [],
+      tileUrl: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
     };
   },
   methods: {
     initMap() {
-      this.map = L.map('issMap').setView([51.505, -0.09], 13)
-      this.tileLayer = L.tileLayer(
-        "https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}.png",
-        {
-          maxZoom: 18,
-          attribution:
-            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
-        }
-      );
-      this.tileLayer.addTo(this.map);
+      this.map = L.map('openMap').setView([this.info.latitude, this.info.longitude], 3)
+      /* attributions for adding leaflet map // its important */
+      const attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
+      this.tiles = L.tileLayer(this.tileUrl, { attribution })
+      this.tiles.addTo(this.map);
     },
-    initLayers() {}
+    //initLayers() {}
   },
   created() {
     Axios.get(`https://api.wheretheiss.at/v1/satellites/25544.json`)
@@ -141,15 +136,21 @@ export default {
       .finally(() => (this.loading = false));
   },
   mounted() {
-    this.initMap();
-    this.initLayers();
+    this.initMap()
   }
 };
 </script>
 
 <style scoped>
-  #issMap {
+  #openMap {
     height: 300px;
   }
+  /* {
+        maxZoom: 18,
+        attribution:
+        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
+      } */
 </style>
+
+
 
