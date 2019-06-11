@@ -68,13 +68,13 @@
       </div>
 
       <!-- leaflet Js mapping feauture -->
-      <div id="openMap" ref="mapElement" class="w-full shadow-xl rounded mt-10 p-8 bg-gray-2200">
-        <button @click="initMap" class="bg-green-400 text-white bg-indigo-400 rounded p-8 mx-auto">SHOW MAP</button>
+      <div id="openMap" ref="mapElement" class="w-full h-64 shadow-xl rounded-lg mt-10 p-8 bg-indigo-200">
+        <button @click="initMap" class="bg-indigo-500 m-12 text-white rounded p-8">SEE THE LIVE TRACKING</button>
         </div>    
       <div class="max-w-md md:flex bg-white mt-12 rounded-lg mx-auto shadow-xl p-8">
         <img
-          src="../assets/iss.png"
-          class="w-24 h-24 md:w-32 md:mx-0 md:h-32 md:mt-6 md:mr-8 mx-auto"
+          src="../assets/developer.png"
+          class="w-32 rounded-full h-32 md:w-32 md:mx-0 md:h-32 md:mt-6 md:mr-8 mx-auto"
           alt
         >
         <div class="mt-8 md:text-left text-center">
@@ -97,6 +97,7 @@
 // https://www.google.com/maps/place/51%C2%B030'31.5%22N+0%C2%B007'15.1%22W/@51.508742,-0.1230387,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x0!8m2!3d51.508742!4d-0.12085
 import Axios from "axios";
 import L from "leaflet";
+import { setInterval } from 'timers';
 
 export default {
   data() {
@@ -116,7 +117,7 @@ export default {
   },
   methods: {
     initMap() {
-      this.map = L.map('openMap').setView([this.info.latitude, this.info.longitude], 3)
+      this.map = L.map('openMap').setView([this.info.latitude, this.info.longitude], 2)
       /* attributions for adding leaflet map // its important */
       const attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
       this.tiles = L.tileLayer(this.tileUrl, { attribution })
@@ -140,18 +141,12 @@ export default {
     this.initMap()
   }
 };
+
+setInterval(() => {
+  let openMap = document.getElementById('openMap')
+  location.reload()
+}, 40000);
+
 </script>
-
-<style scoped>
-  #openMap {
-    height: 300px;
-  }
-  /* {
-        maxZoom: 18,
-        attribution:
-        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
-      } */
-</style>
-
 
 
