@@ -74,7 +74,7 @@
       </div>
 
     <!-- leaflet Js mapping feauture -->
-    
+    <div id="issMap" class="w-full shadow-xl rounded mt-10 h-64 p-8 bg-gray-200"></div>
 
       <div class="max-w-md md:flex bg-white mt-12 rounded-lg mx-auto shadow-xl p-8">
         <img
@@ -136,6 +136,8 @@ export default {
         this.error = true;
       })
       .finally(() => (this.loading = false));
-  }
+  } 
 };
+
+  const myapp = L.map('issMap').setView([51.505, -0.09], 13);
 </script>
