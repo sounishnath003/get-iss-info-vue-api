@@ -45,7 +45,7 @@
           <div class="mr-3">
             <h2 class="text-lg text-black">
               Velocity :
-              <b class="text-indigo-800 text-xl">{{ info.velocity }}</b>
+              <b class="text-indigo-800 text-xl">{{ info.velocity }} mph</b>
             </h2>
           </div>
           <div class="mr-3">
@@ -68,9 +68,9 @@
       </div>
 
       <!-- leaflet Js mapping feauture -->
-      <div id="openMap" ref="mapElement" class="w-full shadow-xl rounded mt-10 p-8 bg-gray-2200"></div>
-      {{ tileUrl }} 123456 MAP ADDING
-      <button @click="initMap" class="bg-red-500 p-8">SHOW MAP</button>
+      <div id="openMap" ref="mapElement" class="w-full shadow-xl rounded mt-10 p-8 bg-gray-2200">
+        <button @click="initMap" class="bg-green-400 text-white bg-indigo-400 rounded p-8 mx-auto">SHOW MAP</button>
+        </div>    
       <div class="max-w-md md:flex bg-white mt-12 rounded-lg mx-auto shadow-xl p-8">
         <img
           src="../assets/iss.png"
@@ -111,6 +111,7 @@ export default {
       tiles: null,
       layers: [],
       tileUrl: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+
     };
   },
   methods: {
@@ -119,7 +120,7 @@ export default {
       /* attributions for adding leaflet map // its important */
       const attribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>'
       this.tiles = L.tileLayer(this.tileUrl, { attribution })
-      this.tiles.addTo(this.map);
+      this.tiles.addTo(this.map)
     },
     //initLayers() {}
   },
