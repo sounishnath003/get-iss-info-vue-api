@@ -72,6 +72,10 @@
           ></iframe>
         </div>
       </div>
+
+    <!-- leaflet Js mapping feauture -->
+    
+
       <div class="max-w-md md:flex bg-white mt-12 rounded-lg mx-auto shadow-xl p-8">
         <img
           src="../assets/iss.png"
@@ -121,7 +125,8 @@ export default {
     }
   },
   created() {
-    Axios.get(`https://api.wheretheiss.at/v1/satellites/25544.json`, `https://ipapi.co/8.8.8.8/json/`)
+    Axios
+    .get(`https://api.wheretheiss.at/v1/satellites/25544.json`)
       .then(response => {
         this.info = response.data
       })
