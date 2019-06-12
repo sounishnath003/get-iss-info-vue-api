@@ -3,7 +3,7 @@
            <div class="max-w-md md:flex bg-white mt-12 rounded-lg mx-auto shadow-xl p-8">
         <img
           src="../assets/developer.png"
-          class="w-32 rounded-full h-32 md:w-32 md:mx-0 md:h-32 md:mt-6 md:mr-8 mx-auto"
+          class="w-32 rounded-full shadow-xl border-2 border-indigo-500 h-32 md:w-32 md:mx-0 md:h-32 md:mt-6 md:mr-8 mx-auto"
           alt
         >
         <div class="mt-8 md:text-left text-center">
