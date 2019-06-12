@@ -83,7 +83,6 @@
 // https://www.google.com/maps/place/51%C2%B030'31.5%22N+0%C2%B007'15.1%22W/@51.508742,-0.1230387,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x0!8m2!3d51.508742!4d-0.12085
 import Axios from "axios";
 import L, { marker } from "leaflet";
-import { setInterval } from "timers";
 
 export default {
   data() {
@@ -100,7 +99,8 @@ export default {
       marker: null,
       tileUrl: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
       markerIcon: null,
-      markerUri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/International_Space_Station.svg/200px-International_Space_Station.svg.png',
+      markerUri:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/International_Space_Station.svg/200px-International_Space_Station.svg.png"
     };
   },
   methods: {
@@ -110,23 +110,33 @@ export default {
         2
       );
       /* set icon onject */
-      const icon = this.markerIcon = L.icon({
+      const icon = (this.markerIcon = L.icon({
         iconUrl: this.markerUri,
-        iconSize: [80,66],
-        iconAnchor: [40, 33]
-      })
+        iconSize: [80, 66],
+        iconAnchor: [40, 33],
+        shadowSize: [70, 55]
+      }));
       /* set marker position */
       this.marker = L.marker([0, 0]);
       /* attributions for adding leaflet map // its important */
       const attribution =
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>';
       this.tiles = L.tileLayer(this.tileUrl, { attribution });
-      this.marker = L.marker([this.info.latitude, this.info.longitude], {icon: icon}).bindTooltip('hello there').addTo(
-        this.map
-      );
-      this.tiles.addTo(this.map);
-    },
+      setInterval(() => {
+        this.marker = L.marker([this.info.latitude, this.info.longitude], {
+          icon: icon
+        }).addTo(this.map);
+        this.marker
+          .setLatLng([this.info.latitude, this.info.longitude], { icon: icon })
+          .addTo(this.map);
+        this.tiles.addTo(this.map);
+        this.marker.clearLayer();
+      }, 200);
+    }
     //initLayers() {}
+  },
+  mounted() {
+    this.initMap();
   },
   created() {
     Axios.get(`https://api.wheretheiss.at/v1/satellites/25544.json`)
@@ -140,16 +150,12 @@ export default {
         this.error = true;
       })
       .finally(() => (this.loading = false));
-  },
-  mounted() {
-    this.initMap();
   }
 };
 
 setInterval(() => {
   let openMap = document.getElementById("openMap");
-  //location.reload();
+  location.reload();
 }, 40000);
 </script>
-
 

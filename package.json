@@ -10,6 +10,7 @@
   "dependencies": {
     "@types/leaflet": "^1.4.4",
     "core-js": "^2.6.5",
+    "dns": "^0.2.2",
     "leaflet": "^1.5.1",
     "vue": "^2.6.10",
     "vue2-leaflet": "^2.1.1"
