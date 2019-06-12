@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div id="app" class="mx-auto max-w-4xl mt-10 shadow-2xl p-12">
-      <div class="rounded-full mx-auto m-4 w-32 h-32">
+    <div id="app">
+      <!-- <div class="rounded-full mx-auto m-4 w-32 h-32">
         <img src="../assets/iss.png" alt>
       </div>
-      <h2 class="text-2xl rounded-lg text-center p-3">Get The ISS Satelite Location</h2>
+      <h2 class="text-2xl rounded-lg text-center p-3">Get The ISS Satelite Location</h2> -->
       <div class="containe text-center">
         <span class="font-mono font-bold mt-3 text-lg">Details of the satelite tracking</span>
         <div class="md:text-left md:flex p-2 flex-row justify-between mt-5">
@@ -78,23 +78,6 @@
           class="bg-indigo-500 m-12 text-white rounded p-8"
         >SEE THE LIVE TRACKING</button>
       </div>
-      <div class="max-w-md md:flex bg-white mt-12 rounded-lg mx-auto shadow-xl p-8">
-        <img
-          src="../assets/developer.png"
-          class="w-32 rounded-full h-32 md:w-32 md:mx-0 md:h-32 md:mt-6 md:mr-8 mx-auto"
-          alt
-        >
-        <div class="mt-8 md:text-left text-center">
-          <div class="text-lg font-bold">Sounish Nath</div>
-          <a href="https://github.com/sounishnath003">
-            <div class="text-purple-500 mt-3">Student Developer</div>
-          </a>
-          <div class="text-purple-500 mt-3">Kolkata, IN</div>
-          <div class="text-gray-500 m-2">flock.sinasini@gmail.com</div>
-          <div class="text-gray-500 m-2">(+91)-8017204855</div>
-          <div>**This site is under construction</div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -129,13 +112,15 @@ export default {
         2
       );
       /* set marker position */
-      this.marker = L.marker([0, 0])
+      this.marker = L.marker([0, 0]);
       /* attributions for adding leaflet map // its important */
       const attribution =
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>';
       this.tiles = L.tileLayer(this.tileUrl, { attribution });
-      this.marker = L.marker([this.info.latitude, this.info.longitude]).addTo(this.map)
-      this.tiles.addTo(this.map)
+      this.marker = L.marker([this.info.latitude, this.info.longitude]).addTo(
+        this.map
+      );
+      this.tiles.addTo(this.map);
     }
     //initLayers() {}
   },
@@ -147,7 +132,7 @@ export default {
       .catch(error => {
         this.error.push(error);
         this.error.push(error);
-        alert('sorry, network failure')
+        alert("sorry, network failure");
         this.error = true;
       })
       .finally(() => (this.loading = false));
