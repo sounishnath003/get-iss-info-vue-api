@@ -131,6 +131,7 @@ export default {
       const attribution =
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>';
       this.tiles = L.tileLayer(this.tileUrl, { attribution });
+      this.tiles = L.marker([this.info.latitude, this.info.longitude])
       this.tiles.addTo(this.map);
     }
     //initLayers() {}
