@@ -98,7 +98,9 @@ export default {
       tiles: null,
       layers: [],
       marker: null,
-      tileUrl: "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+      tileUrl: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+      markerIcon: null,
+      markerUri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/International_Space_Station.svg/200px-International_Space_Station.svg.png',
     };
   },
   methods: {
@@ -107,17 +109,23 @@ export default {
         [this.info.latitude, this.info.longitude],
         2
       );
+      /* set icon onject */
+      const icon = this.markerIcon = L.icon({
+        iconUrl: this.markerUri,
+        iconSize: [80,66],
+        iconAnchor: [40, 33]
+      })
       /* set marker position */
       this.marker = L.marker([0, 0]);
       /* attributions for adding leaflet map // its important */
       const attribution =
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>';
       this.tiles = L.tileLayer(this.tileUrl, { attribution });
-      this.marker = L.marker([this.info.latitude, this.info.longitude]).addTo(
+      this.marker = L.marker([this.info.latitude, this.info.longitude], {icon: icon}).bindTooltip('hello there').addTo(
         this.map
       );
       this.tiles.addTo(this.map);
-    }
+    },
     //initLayers() {}
   },
   created() {
