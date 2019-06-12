@@ -103,7 +103,7 @@
 <script>
 // https://www.google.com/maps/place/51%C2%B030'31.5%22N+0%C2%B007'15.1%22W/@51.508742,-0.1230387,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x0!8m2!3d51.508742!4d-0.12085
 import Axios from "axios";
-import L from "leaflet";
+import L, { marker } from "leaflet";
 import { setInterval } from "timers";
 
 export default {
@@ -118,6 +118,7 @@ export default {
       map: null,
       tiles: null,
       layers: [],
+      marker: null,
       tileUrl: "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
     };
   },
@@ -127,12 +128,14 @@ export default {
         [this.info.latitude, this.info.longitude],
         2
       );
+      /* set marker position */
+      this.marker = L.marker([0, 0])
       /* attributions for adding leaflet map // its important */
       const attribution =
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>';
       this.tiles = L.tileLayer(this.tileUrl, { attribution });
-      this.tiles = L.marker([this.info.latitude, this.info.longitude])
-      this.tiles.addTo(this.map);
+      this.marker = L.marker([this.info.latitude, this.info.longitude]).addTo(this.map)
+      this.tiles.addTo(this.map)
     }
     //initLayers() {}
   },
@@ -156,7 +159,7 @@ export default {
 
 setInterval(() => {
   let openMap = document.getElementById("openMap");
-  location.reload();
+  //location.reload();
 }, 40000);
 </script>
 
