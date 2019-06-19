@@ -5,7 +5,7 @@
 npm install
 ```
 
-![iss-info](1..PNG)
+![iss-info](1.PNG)
 
 ### Compiles and hot-reloads for development
 ```
