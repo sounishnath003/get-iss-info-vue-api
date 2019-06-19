@@ -5,6 +5,8 @@
 npm install
 ```
 
+![iss-info](1..PNG)
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
