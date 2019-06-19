@@ -1,7 +1,9 @@
 <template>
   <div>
     <div id="app">
-      {{ error }}
+      <div v-if="error">
+        {{error}} 
+      </div>
       <div class="containe text-center">
         <span class="font-mono font-bold mt-3 text-lg">Details of the satelite tracking</span>
         <div class="md:text-left md:flex p-2 flex-row justify-between mt-5">
